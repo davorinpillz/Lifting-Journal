@@ -6,13 +6,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Workout from './models/Workout.js'
 import { useLocation } from 'react-router-dom';
-import { Outlet, 
-    Link, 
-    useLoaderData,
-    redirect,
-    NavLink,
-    useNavigation,
-  } from "react-router-dom";
+import Observable from './Observable.js'
+
 function Session () {
 
 
@@ -65,48 +60,42 @@ function Session () {
                 lift: currentLift,
                 weight: currentWeight,
                 reps: currentReps,
-                notes: currentNotes,
-                timeComplete: new Date()
+                notes: currentNotes
             }],
             id: sessionDetails._id
         }
+        console.log(parseInt(document.getElementById("timer").textContent))
         axios.put(`http://localhost:3001/sessions`, setData).then((res)=> {
             console.log(res)
         })
-        alert("Set Saved")
-        setCurrentNotes('')
     }
-    let sessionData = ''
-    const navigate = useNavigate();
-    const [userDetails, setUserDetails] = useState({});
-      const getUserDetails = async (accessToken) => {
-          const response = await fetch(
-            `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`
-          );
-          const data = await response.json();
-          setUserDetails(data);
-          Cookies.set('user', userDetails.name)
-        };
-      
-        useEffect(() => {
-          const accessToken = Cookies.get("access_token");
-      
-          if (!accessToken) {
-            navigate("/");
-          }
-      
-          getUserDetails(accessToken);
-    
-        }, [navigate]);
-    
+    const startTimer = (time) => {
+        setCurrentTimer(time - 1)
+    }
+    const saveSetAndStartTimer = async() => {
+        saveSet()
+        setInterval(()=> {
+            setCurrentTimer(currentTimer - 1)
+        }), 1000
+
+    }
+
+
+
+
     console.log(currentWeight, currentReps, currentTimer, currentNotes, currentLift)
     return (
         <>
         <div class="card">
-
+                <div class="row">
+                    <p>{sessionDetails._id} </p>
+                    <p>Started at: {sessionDetails.timeStart}</p>
+                    <h2 id="timer">{currentTimer}</h2>
+                </div>
+                <br></br>
                 <div class="row">
                     <div class="dropdown">
-                        <button class="w-100 btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {currentLift ? currentLift : "Select Lift"}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -116,7 +105,7 @@ function Session () {
                             <a id="Push Press" class="dropdown-item" href="#" onClick={selectLift}>Push Press</a>
                             <a id="Squat" class="dropdown-item" href="#" onClick={selectLift}>Squat</a>
                             <a id="Bench Press" class="dropdown-item" href="#" onClick={selectLift}>Bench Press</a>
-                            <a id="KB Clean & Push Press" class="dropdown-item" href="#" onClick={selectLift}>KB Clean & Push Press</a>
+                            <a id="Barbell Curl" class="dropdown-item" href="#" onClick={selectLift}>Barbell Curl</a>
                         </div>
                     </div>
                 </div>
@@ -150,6 +139,20 @@ function Session () {
                 </div>
                 <br></br>
                 <div class="row justify-content-md-center">
+                    <div class="col-sm">
+                    <Form id="enter-time-between-sets">
+                        <input
+                            type="text"
+                            id="timer"
+                            aria-label='Enter time between sets'
+                            placeholder="Enter time between sets"
+                            onChange={setTimer}
+                        />
+                    </Form>
+                    </div>
+                </div>
+                <br></br>
+                <div class="row justify-content-md-center">
                 <   Form id="enter-bodyweight">
                         <input
                             type="text"
@@ -175,23 +178,19 @@ function Session () {
                 <br></br>
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
-                        <button type="button" class="w-100 btn btn-lg btn-primary" onClick={saveSet}>Save Set</button>
+                        <button type="button" class="btn btn-primary btn-sm" onClick={saveSetAndStartTimer} >Save Set</button>
                     </div>
                 </div>
                 <br></br>
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
-                    <Link to='/Main'>
-                        <button type="button" class="w-100 btn btn-lg btn-primary" /*onClick={revokeToken}*/>Save Session</button>
-                    </Link>
+                        <button type="button" class="btn btn-primary btn-sm">Save Session</button>
                     </div>
                 </div>
                 <br></br>
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
-                        <Link to='/History'>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">View History</button>
-                        </Link>
+                        <button type="button" class="btn btn-primary btn-sm">View History</button>
                     </div>
                 </div>
         </div>
@@ -200,22 +199,3 @@ function Session () {
 }
 
 export default Session
-/*                <div class="row">
-                    <p>{sessionDetails._id} </p>
-                    <p>Started at: {sessionDetails.timeStart}</p>
-                </div>
-                
-                                <br></br>
-                <div class="row justify-content-md-center">
-                    <div class="col-sm">
-                    <Form id="enter-time-between-sets">
-                        <input
-                            type="text"
-                            id="timer"
-                            aria-label='Enter time between sets'
-                            placeholder="Enter time between sets"
-                            onChange={setTimer}
-                        />
-                    </Form>
-                    </div>
-                </div>*/
