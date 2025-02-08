@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios"
 import './App.css'
+import Button from '@mui/material/Button';
+
 
 export default function Root() {
   
@@ -65,13 +67,13 @@ export default function Root() {
       <div class="card">
         <div class="d-grid gap-2">
           <Link to={`/Session`} >
-              <button type="button" class="w-100 btn btn-lg btn-primary" onClick={establishSession}>Start Session</button>
+              <Button  onClick={establishSession}>Start Session</Button>
           </Link>
           <Link to={`/History`} >
-              <button type="button" class="w-100 btn btn-lg btn-primary">View History</button>
+              <Button >View History</Button>
           </Link>
           <Link to={`/`} >
-              <button type="button" class="w-100 btn btn-lg btn-primary" onClick={revokeToken}>Log Out</button>
+              <Button  onClick={revokeToken}>Log Out</Button>
           </Link>
         </div>
       </div>
@@ -121,16 +123,16 @@ export default function Root() {
 
 
 /*     <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <br/>
         <input>
         </input>
 <br/>
-        <button onClick={() => navigate('session')}>
+        <Button onClick={() => navigate('session')}>
         Sign In
-        </button>
+        </Button>
 
 
       </div>

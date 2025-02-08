@@ -13,6 +13,8 @@ import { Outlet,
     NavLink,
     useNavigation,
   } from "react-router-dom";
+import Button from '@mui/material/Button';
+  
 function Session () {
 
 
@@ -106,9 +108,9 @@ function Session () {
 
                 <div class="row">
                     <div class="dropdown">
-                        <button class="w-100 btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <Button id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {currentLift ? currentLift : "Select Lift"}
-                        </button>
+                        </Button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a id="Deadlift" class="dropdown-item" href="#" onClick={selectLift}>Deadlift</a>
                             <a id="Power Clean" class="dropdown-item" href="#" onClick={selectLift}>Power Clean</a>
@@ -175,14 +177,14 @@ function Session () {
                 <br></br>
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
-                        <button type="button" class="w-100 btn btn-lg btn-primary" onClick={saveSet}>Save Set</button>
+                        <Button  onClick={saveSet}>Save Set</Button>
                     </div>
                 </div>
                 <br></br>
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
                     <Link to='/Main'>
-                        <button type="button" class="w-100 btn btn-lg btn-primary" /*onClick={revokeToken}*/>Save Session</button>
+                        <Button /*onClick={revokeToken}*/>Save Session</Button>
                     </Link>
                     </div>
                 </div>
@@ -190,7 +192,7 @@ function Session () {
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
                         <Link to='/History'>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">View History</button>
+                            <Button >View History</Button>
                         </Link>
                     </div>
                 </div>

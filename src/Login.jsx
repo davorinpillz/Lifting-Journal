@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import liftingJournalLogo from '/liftingJournalLogo.jpg'
+import Button from '@mui/material/Button';
 
 
 export default function Login() {
@@ -39,11 +40,11 @@ export default function Login() {
     <div className="card">
       <div>
       <div className="row">
-          <h1>Lifting Tracker</h1>
+          <p>Lifting Tracker</p>
           <br></br>
-          <button className="w-100 btn btn-lg btn-primary" onClick={handleClick}>
+          <Button onClick={handleClick}>
             Log In
-          </button>
+          </Button>
         </div>
       </div>
     </div>

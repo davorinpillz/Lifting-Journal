@@ -14,6 +14,8 @@ import { Outlet,
     useNavigation,
   } from "react-router-dom";
   import FilteredList from './FilteredList.jsx'
+import Button from '@mui/material/Button';
+  
   
 function History () {
     const navigate = useNavigate();
@@ -131,9 +133,9 @@ function History () {
         <div class="card">
         <div class="row">
                     <div class="dropdown">
-                        <button class="w-100 btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <Button  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {currentLift ? currentLift : "Select Lift"}
-                        </button>
+                        </Button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a id="Deadlift" class="dropdown-item" href="#" onClick={selectLift}>Deadlift</a>
                             <a id="Power Clean" class="dropdown-item" href="#" onClick={selectLift}>Power Clean</a>
@@ -149,7 +151,7 @@ function History () {
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
                         <Link to='/Session'>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">Current Session</button>
+                            <Button >Current Session</Button>
                         </Link>
                     </div>
                 </div>
@@ -157,7 +159,7 @@ function History () {
                 <div class="row justify-content-md-center">
                     <div class="col-sm">
                         <Link to='/Main'>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">Main Menu</button>
+                            <Button >Main Menu</Button>
                         </Link>
                     </div>
                 </div>
