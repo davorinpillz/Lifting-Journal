@@ -69,7 +69,7 @@ function History () {
         setCurrentLift(event.target.id)
     }
      function getLiftSessions() {
-         axios.get(`https://lifting-journal-1.onrender.com/${userDetails.name}/${currentLift}`)
+         axios.get(`https://lifting-journal-bnx5.onrender.com/${userDetails.name}/${currentLift}`)
             .then((response) => {
                 setLiftHistory(response.data)
             })

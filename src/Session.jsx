@@ -23,7 +23,7 @@ function Session () {
 
     const getSessionDetails = async () => {
         const response = await fetch(
-          `https://lifting-journal-1.onrender.com/sessions`
+          `https://lifting-journal-bnx5.onrender.com/sessions`
         );
         const data = await response.json();
         setSessionDetails(data);
@@ -72,7 +72,7 @@ function Session () {
             }],
             id: sessionDetails._id
         }
-        axios.put(`https://lifting-journal-1.onrender.com/sessions`, setData).then((res)=> {
+        axios.put(`https://lifting-journal-bnx5.onrender.com/sessions`, setData).then((res)=> {
             console.log(res)
         })
         alert("Set Saved")
