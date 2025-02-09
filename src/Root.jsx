@@ -54,7 +54,7 @@ export default function Root() {
       timeStart: new Date()
     }
     console.log(sessionStart.timeStart)
-    axios.post('http://localhost:3001/sessions', sessionStart).then((response) => {
+    axios.post('https://lifting-journal-1.onrender.com/sessions', sessionStart).then((response) => {
       sessionData = response.data
       console.log(sessionData)
 
