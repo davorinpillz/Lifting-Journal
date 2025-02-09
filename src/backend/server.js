@@ -62,3 +62,13 @@ app.get('/:name/:lift',  async (req,res) => {
   }
 
 })
+
+app.get('/',  async (req,res) => {
+  try {
+  res.send("Server works")
+  } catch(e) {
+    console.log(e.message)
+    res.send(400).send('Server Error')
+  }
+
+})
